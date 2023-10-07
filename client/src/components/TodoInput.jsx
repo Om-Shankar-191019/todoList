@@ -1,7 +1,8 @@
 import axios from "axios";
 import React, { useContext, useState } from "react";
 import { TodoContext } from "../context/todoContext";
-
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const BASE_URL = `http://localhost:5000`;
 
 const TodoInput = () => {
@@ -19,8 +20,13 @@ const TodoInput = () => {
           title: todo,
         });
         setTodoList((prev) => [...prev, response.data.data]);
+        setTodo("");
       } catch (error) {
-        console.log(error);
+        if (error.response && error.response.data.error) {
+          toast.error(error.response.data.error);
+        } else {
+          toast.error("something went wrong! Try again.");
+        }
       }
     };
     addTask();
