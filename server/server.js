@@ -4,6 +4,7 @@ dotenv.config();
 const express = require("express");
 const app = express();
 const cors = require("cors");
+app.use(cors());
 
 //routes
 const taskRoutes = require("./Routes/taskRoutes");

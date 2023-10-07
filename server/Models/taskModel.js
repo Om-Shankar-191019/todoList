@@ -6,7 +6,7 @@ const TaskSchema = new mongoose.Schema(
       type: String,
       required: [true, "Please provide title."],
     },
-    description: { type: String, default: "" },
+    status: { type: String, default: "pending" },
   },
   {
     timestamps: true,

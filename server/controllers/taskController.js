@@ -2,11 +2,11 @@ const Task = require("../Models/taskModel");
 
 const createTask = async (req, res) => {
   try {
-    const { title, description } = req.body;
+    const { title, status } = req.body;
     if (!title) {
       throw new Error("Title can not be empty.");
     }
-    const data = await Task.create({ title, description });
+    const data = await Task.create({ title, status });
     res.status(200).json({ data: data });
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -48,9 +48,9 @@ const deleteTask = async (req, res) => {
 
 const updateTask = async (req, res) => {
   try {
-    const { title, description } = req.body;
+    const { title, status } = req.body;
     const { id } = req.params;
-    const task = await Task.findByIdAndUpdate(id, { title, description });
+    const task = await Task.findByIdAndUpdate(id, { title, status });
     res.status(200).json({ task, message: "updated successfully." });
   } catch (error) {
     res.status(400).json({ error: error.message });
