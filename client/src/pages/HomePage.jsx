@@ -2,13 +2,15 @@ import React, { useContext, useEffect, useState } from "react";
 import TodoInput from "../components/TodoInput";
 import TodoStrip from "../components/TodoStrip";
 import axios from "axios";
-import { TodoContext } from "../context/todoContext";
+import { TodoContext, UpdateContext } from "../context/todoContext";
 
 const BASE_URL = `http://localhost:5000`;
 
 const HomePage = () => {
   //   const [todoList, setTodoList] = useState([]);
+  //   const { updateTitle, setUpdateTitle } = useContext(UpdateContext);
   const { todoList, setTodoList } = useContext(TodoContext);
+  //   console.log(updateTitle);
 
   useEffect(() => {
     const getAllTodos = async () => {

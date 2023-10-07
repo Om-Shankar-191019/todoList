@@ -7,29 +7,27 @@ const BASE_URL = `http://localhost:5000`;
 
 const TodoInput = () => {
   const [todo, setTodo] = useState("");
+
   const { todoList, setTodoList } = useContext(TodoContext);
 
   const handleInputChange = (e) => {
     setTodo(e.target.value);
   };
 
-  const handleAddTodo = () => {
-    const addTask = async () => {
-      try {
-        const response = await axios.post(`${BASE_URL}/api/post`, {
-          title: todo,
-        });
-        setTodoList((prev) => [...prev, response.data.data]);
-        setTodo("");
-      } catch (error) {
-        if (error.response && error.response.data.error) {
-          toast.error(error.response.data.error);
-        } else {
-          toast.error("something went wrong! Try again.");
-        }
+  const handleAddTodo = async () => {
+    try {
+      const response = await axios.post(`${BASE_URL}/api/post`, {
+        title: todo,
+      });
+      setTodoList((prev) => [response.data.data, ...prev]);
+      setTodo("");
+    } catch (error) {
+      if (error.response && error.response.data.error) {
+        toast.error(error.response.data.error);
+      } else {
+        toast.error("something went wrong! Try again.");
       }
-    };
-    addTask();
+    }
   };
 
   return (
